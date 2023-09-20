@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1230e599-a42b-423a-bad3-2cc17ce72cfe",
+		"_postman_id": "de4ad105-d04d-4386-af4d-a961deca19f7",
 		"name": "Get's Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29779043"
@@ -22,11 +22,32 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"usersList\");"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"page\": 2,\r\n    \"per_page\": 6,\r\n    \"total\": 12,\r\n    \"total_pages\": 2,\r\n    \"data\": [\r\n        {\r\n            \"id\": 7,\r\n            \"email\": \"michael.lawson@reqres.in\",\r\n            \"first_name\": \"Michael\",\r\n            \"last_name\": \"Lawson\",\r\n            \"avatar\": \"https://reqres.in/img/faces/7-image.jpg\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"email\": \"lindsay.ferguson@reqres.in\",\r\n            \"first_name\": \"Lindsay\",\r\n            \"last_name\": \"Ferguson\",\r\n            \"avatar\": \"https://reqres.in/img/faces/8-image.jpg\"\r\n        },\r\n        {\r\n            \"id\": 9,\r\n            \"email\": \"tobias.funke@reqres.in\",\r\n            \"first_name\": \"Tobias\",\r\n            \"last_name\": \"Funke\",\r\n            \"avatar\": \"https://reqres.in/img/faces/9-image.jpg\"\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"email\": \"byron.fields@reqres.in\",\r\n            \"first_name\": \"Byron\",\r\n            \"last_name\": \"Fields\",\r\n            \"avatar\": \"https://reqres.in/img/faces/10-image.jpg\"\r\n        },\r\n        {\r\n            \"id\": 11,\r\n            \"email\": \"george.edwards@reqres.in\",\r\n            \"first_name\": \"George\",\r\n            \"last_name\": \"Edwards\",\r\n            \"avatar\": \"https://reqres.in/img/faces/11-image.jpg\"\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"email\": \"rachel.howell@reqres.in\",\r\n            \"first_name\": \"Rachel\",\r\n            \"last_name\": \"Howell\",\r\n            \"avatar\": \"https://reqres.in/img/faces/12-image.jpg\"\r\n        }\r\n    ],\r\n    \"support\": {\r\n        \"url\": \"https://reqres.in/#support-heading\",\r\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "https://reqres.in/api/users?page=2",
 					"protocol": "https",
@@ -43,6 +64,109 @@
 							"key": "page",
 							"value": "2"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RequêteGet2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"singleUser\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"pm.globals.set(\"object_id\", jsonData.id);\r",
+							"\r",
+							"pm.test(\"Status code 200\", function() {\r",
+							"    pm.response.to.have.status(200)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"id\": 2,\r\n        \"email\": \"janet.weaver@reqres.in\",\r\n        \"first_name\": \"Janet\",\r\n        \"last_name\": \"Weaver\",\r\n        \"avatar\": \"https://reqres.in/img/faces/2-image.jpg\"\r\n    },\r\n    \"support\": {\r\n        \"url\": \"https://reqres.in/#support-heading\",\r\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RequêteGet3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"pm.globals.set(\"object_id\", jsonData.id);\r",
+							"\r",
+							"pm.test(\"Status code 404\", function() {\r",
+							"    pm.response.to.have.status(404)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"code\": 200,\r\n  \"type\": \"unknown\",\r\n  \"message\": \"ok\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/logout\n",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"logout\n"
 					]
 				}
 			},
